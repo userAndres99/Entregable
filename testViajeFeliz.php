@@ -8,8 +8,7 @@ include 'viajeFeliz.php';
  * @param int $max
  * @return int
  */
-function solicitarNumeroEntre($min, $max)
-{
+function solicitarNumeroEntre($min, $max){
     //int $numero
     $numero = trim(fgets(STDIN));
     while (!is_int($numero) && !($numero >= $min && $numero <= $max)) {
@@ -18,18 +17,74 @@ function solicitarNumeroEntre($min, $max)
     }
     return $numero;
 }
-
+//--------------------------------------------------------------------------------
 /**
+ * (muestra a los pasajeros del viaje)
  * @param array $losPasajeros
  */
 function mostrarPasajeros($losPasajeros){
 
     for($i=0;$i < count($losPasajeros); $i++){
-        echo $i + 1 ."-NOMBRE:".$losPasajeros[$i]["nombre"]." APELLIDO:".$losPasajeros[$i]["apellido"]." DNI:".$losPasajeros[$i]["documento"]."\n";
+
+        echo "--- PASAJERO ". $i+1 ."---\n";
+        echo "NOMBRE:".$losPasajeros[$i]["nombre"]." APELLIDO:".$losPasajeros[$i]["apellido"]." DNI:".$losPasajeros[$i]["documento"]."\n \n";
     }
 }
+//-------------------------------------------------------------------------------- 
+/**
+ * (Menu Principal del Viaje)
+ */
+function menuPrincipal(){
+    // int $opcionPrincipal
 
-function cargarPasajerosDePrueba(){
+    echo "\n----- MENU PRINCIPAL ----- \n \n";
+    
+    echo "1-)Ver los Datos del Viaje \n";
+    echo "2-)Ver los Datos de los Pasajeros: \n";
+    echo "3-)Modificar la Informacion del Viaje:  \n";
+    echo "4-)Modificar la Informacion de Pasajeros: \n \n";
+
+    $opcionPrincipal=solicitarNumeroEntre(1,4);
+    return $opcionPrincipal;
+}
+//--------------------------------------------------------------------------------
+/**
+ * (Menu Para Modificar los Datos del Viaje)
+ */
+function menuViaje(){
+    // int $opcionViaje
+
+    echo "----- QUE DESEA MODIFICAR DEL VIAJE? ----- \n \n";
+
+    echo "1) El Codigo del Viaje \n";
+    echo "2) El Destino del Viaje \n";
+    echo "3) La Cantidad Maxima de Pasajeros \n \n";
+
+    $opcionViaje=solicitarNumeroEntre(1,3);
+    return $opcionViaje;
+}
+//--------------------------------------------------------------------------------
+/**
+ * (Menu Para Modificar los Datos de los Pasajeros)
+ */
+function menuPasajeros(){
+    //int $opcionPasajero
+
+    echo "----- QUE DESEA MODIFICAR DEL PASAJERO? ----- \n \n";
+
+    echo "1) El Nombre\n";
+    echo "2) El Apellido\n";
+    echo "3) Numero de Documento\n";
+
+    $opcionPasajero=solicitarNumeroEntre(1,3);
+    return $opcionPasajero;
+
+}
+//--------------------------------------------------------------------------------
+/**
+ * (un array de pasajeros de prueba)
+ */
+/*function cargarPasajerosDePrueba(){
     //array $losPasajerosV
     $losPasajerosV=[];
     $losPasajerosV[0]=["nombre"=>"juan" , "apellido" =>"menard" , "documento"=> 41327654];
@@ -39,50 +94,77 @@ function cargarPasajerosDePrueba(){
     $losPasajerosV[4]=["nombre"=>"marta" , "apellido" =>"rondozo" , "documento"=> 44047643];
 
     return $losPasajerosV;
-}
-
-
-
-
+}*/
 
 $viaje1= new Viaje();
 
-$pasajerosDePrueba=cargarPasajerosDePrueba();
+/**DATOS DE PRUEBAS 
+ * pasajerosDePrueba=cargarPasajerosDePrueba();
+ * $viaje1->set_arrayPasajeros($pasajerosDePrueba);
+ * $viaje1->set_codigo(4);
+ * $viaje1->set_destino("Micasa");
+ * $viaje1->set_cantMaximaPasajeros(45);
+*/
 
-$viaje1->set_arrayPasajeros($pasajerosDePrueba);
-$viaje1->set_codigo(4);
-$viaje1->set_destino("Micasa");
-$viaje1->set_cantMaximaPasajeros(45);
+//PARA QUE EL USUARIO INGRESE LOS DATOS DEL VIAJE Y LOS PASAJEROS
+echo "\n----- BIENVENIDO A VIAJE FELIZ----- \n \n";
 
+echo "Ingrese el Codigo del Viaje \n ";
+$codigoViaje = trim(fgets(STDIN));
 
+echo "Ingrese el Destino del VIaje \n";
+$destinoViaje = trim(fgets(STDIN));
 
+echo "Ingrese la Cantidad Maxima de Pasajeros \n";
+$cantidadMaxPasajeros=trim(fgets(STDIN));
+
+//POR SI SE INGRESA UN NUMERO MENOR O IGUAL A 0
+while ($cantidadMaxPasajeros <= 0){
+    echo "Debe Ingresar un Numero Mayor a 0: \n ";
+    $cantidadMaxPasajeros=trim(fgets(STDIN));
+}
+
+//PARA IR CARGANDO EL ARRAY DE PASAJEROS
+for ($i=1;$i <= $cantidadMaxPasajeros;$i++){
+    echo "\n --- Pasajero ". $i ." de ".$cantidadMaxPasajeros." ---\n \n";
+
+    echo "Ingrese el Nombre: \n";
+    $nombrePasajero = trim(fgets(STDIN)); 
+    echo "Ingrese el Apellido: \n";
+    $apellidoPasajero = trim(fgets(STDIN));
+    echo "Ingrese el DNI: \n";
+    $documentoPasajero = trim(fgets(STDIN));
+
+    $arrayPasajerosViaje[$i-1]=["nombre"=>$nombrePasajero , "apellido" =>$apellidoPasajero , "documento"=> $documentoPasajero];
+
+}
+
+//ENVIO DE LOS DATOS INGRESADOS POR EL USUARIO
+$viaje1->set_codigo($codigoViaje);
+$viaje1->set_destino($destinoViaje);
+$viaje1->set_cantMaximaPasajeros($cantidadMaxPasajeros);
+$viaje1->set_arrayPasajeros($arrayPasajerosViaje);
 
 do{
 
-
-
-    echo "SELECCIONAR UNA OPCION:\n";
-    echo "1) Ver los datos del viaje \n";
-    echo "2) Ver los datos de los pasajeros: \n";
-    echo "3) Modificar la informacion del viaje: \n";
-    echo "4) Modificar la informacion de pasajeros: \n";
-
-    $opcion=solicitarNumeroEntre(1,4);
+    $opcion = menuPrincipal();
 
     switch($opcion){
         case 1:
-            //$pasajeros=$viaje1->get_arrayPasajeros();
-            echo $viaje1;
 
-           /*echo "el destino es ".$viaje1->get_destino()."\n";
-           echo "el codigo es ".$viaje1-get_codigo()."\n";
-           echo "la cantidad maxima de pasajeros es ".$viaje1->get_cantMaximaPasajeros()."\n";
-            */
+            echo "\n----- DATOS DEL VIAJE ----- \n \n";
+
+            echo "el destino es ".$viaje1->get_destino()."\n";
+            echo "el codigo es ".$viaje1-get_codigo()."\n";
+            echo "la cantidad maxima de pasajeros es ".$viaje1->get_cantMaximaPasajeros()."\n";
+            
         break;
         case 2:
 
-            $pasajeros=$viaje1->get_arrayPasajeros();
-            mostrarPasajeros($pasajeros);
+            echo "\n----- DATOS DE LOS PASAJEROS ----- \n \n";
+
+            $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
+            mostrarPasajeros($arrayPasajerosViaje);
 
         break;
         
@@ -91,17 +173,12 @@ do{
             
             do{
 
-                echo "Que desea Modificar del Viaje? \n";
-                echo "1) El Codigo del Viaje \n";
-                echo "2) El Destino del Viaje \n";
-                echo "3) La Cantidad Maxima de Pasajeros \n";
+                $opcion = menuViaje();
 
-                $opcionViaje=solicitarNumeroEntre(1, 3);
-
-                switch($opcionViaje){
+                switch($opcion){
                     
                     case 1:
-                        echo "el codigo es ".$viaje1->get_codigo()."\n";
+                        echo "--- El Codigo es ".$viaje1->get_codigo()." ---\n \n";
                         echo "Ingrese el Nuevo Codigo";
                         $nuevoCodigo=trim(fgets(STDIN));
                         $viaje1=set_codigo($nuevoCodigo);
@@ -109,7 +186,7 @@ do{
                     break;
 
                     case 2:
-                        echo "el destino es ".$viaje1->get_destino()."\n";
+                        echo "--- El Destino es ".$viaje1->get_destino()." ---\n \n";
                         echo "Ingrese el Nuevo Destino";
                         $nuevoDestino=trim(fgets(STDIN));
                         $viaje1=set_destino($nuevoDestino);
@@ -117,7 +194,7 @@ do{
                     break;
 
                     case 3:
-                        echo "la cantidad maxima de pasajeros es ".$viaje1->get_cantMaximaPasajeros()."\n";
+                        echo "--- La Cantidad Maxima de Pasajeros es ".$viaje1->get_cantMaximaPasajeros()." ---\n \n";
                         echo "Ingrese la Nueva Cantidad Maxima de Pasajeros";
                         $nuevaCantMaxPasajeros=trim(fgets(STDIN));
                         $viaje1=set_cantMaximaPasajeros($nuevaCantMaxPasajeros);
@@ -127,56 +204,85 @@ do{
                 }
 
             
-            }while($opcionViaje=!3);
+            }while($opcion=!3);
+
         break;
 
         case 4:
+
+
+            $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
             
-            echo "ingrese la ubicacion del pasajero que quiere modificar";
-            $numPasajero=solicitarNumeroEntre( 1 , count($viaje1->get_arrayPasajeros()));
-            $numPasajero=$numPasajero - 1;
+
+
+            //-----UN DO WHILE POR SI NO SE ENCUENTRA EL DOCUMENTO INGRESADO-----
             do{
-                echo "que es lo que quiere modificar del pasajero ? ";
-                echo "1) el nombre";
-                echo "2) el apellido";
-                echo "3) numero de documento";
-                $opcionPasajero=solicitarNumeroEntre(1,3);
-                switch ($opcionPasajero){
+
+            echo "Ingrese el Documento del Pasajero que Quiere Modificar";
+            $documentoPasajero=trim(fgets(STDIN));
+                
+            $i = 0;
+            //-----RECORRIDO PARCIAL PARA BUSCAR AL PASAJERO-----
+            while (($i < count($arrayPasajerosViaje)) && !($documentoPasajero == $arrayPasajerosViaje[$i]["documento"])) {
+                $i = $i + 1;
+            }
+            if( $i == count($arrayPasajerosViaje)){
+                echo "\n--- EL DOCUMENTO INGRESADO NO FUE ENCONTRADO EN LA LISTA DE PASAJEROS ---  \n \n ";
+            }
+           
+            }while($i == count($arrayPasajerosViaje));
+
+
+            do{
+
+                $opcion=menuPasajeros();
+
+                switch ($opcion){
 
                     case 1:
 
-                        echo "Ingrese el Nuevo Nombre";
+                        echo "--- (EL NOMBRE ES: ".$arrayPasajero[$i]["nombre"].") ---\n\n";
+                        echo "Ingrese el Nuevo Nombre\n";
                         $nuevoNombre=trim(fgets(STDIN));
-                        $viaje1->set_pasajero($numPasajero,"nombre",$nuevoNombre);
+                        $viaje1->set_pasajero($i,"nombre",$nuevoNombre);
 
-                        //$pasajerosDePrueba=$viaje1->get_arrayPasajeros();
-                        //mostrarPasajeros($pasajerosDePrueba);
+                        //-----PARA VER SI SE GUARDO EL NOMBRE-----
+                       // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
+                       // mostrarPasajeros($pasajerosDePrueba);
 
                     break;
 
                     case 2:
 
-                        echo "ingrese el nuevo apellido";
+                        echo "--- (EL APELLIDO ES: ".$arrayPasajero[$i]["apellido"].") ---\n\n";
+                        echo "Ingrese el Nuevo Apellido\n";
                         $nuevoApellido=trim(fgets(STDIN));
-                        $viaje1->set_pasajero($numPasajero,"apellido",$nuevoApellido);
+                        $viaje1->set_pasajero($i,"apellido",$nuevoApellido);
+
+                        //-----PARA VER SI SE GUARDO EL APELLIDO-----
+                        // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
+                        // mostrarPasajeros($pasajerosDePrueba);
 
                     break;
 
                     case 3:
 
-                        echo "ingrese el nuevo documento";
+                        echo "--- (EL DOCUMENTO ES: ".$arrayPasajero[$i]["documento"].") ---\n\n";
+                        echo "Ingrese el Nuevo Documento\n";
                         $nuevoDocumento=trim(fgets(STDIN));
-                        $viaje1->set_pasajero($numPasajero,"documento",$nuevoDocumento);
+                        $viaje1->set_pasajero($i,"documento",$nuevoDocumento);
+
+                        //-----PARA VER SI SE GUARDO EL DOCUMENTO-----
+                        // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
+                        // mostrarPasajeros($pasajerosDePrueba);
 
                     break;
                 }
+                
             }while($opcionPasajero=!3);
+
         break;
-
-            
-
-            
+      
     }
-
 
 }while ($opcion=!4);
