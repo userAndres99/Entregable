@@ -112,7 +112,7 @@ echo "\n----- BIENVENIDO A VIAJE FELIZ----- \n \n";
 echo "Ingrese el Codigo del Viaje \n ";
 $codigoViaje = trim(fgets(STDIN));
 
-echo "Ingrese el Destino del VIaje \n";
+echo "Ingrese el Destino del Viaje \n";
 $destinoViaje = trim(fgets(STDIN));
 
 echo "Ingrese la Cantidad Maxima de Pasajeros \n";
@@ -155,7 +155,7 @@ do{
             echo "\n----- DATOS DEL VIAJE ----- \n \n";
 
             echo "el destino es ".$viaje1->get_destino()."\n";
-            echo "el codigo es ".$viaje1-get_codigo()."\n";
+            echo "el codigo es ".$viaje1->get_codigo()."\n";
             echo "la cantidad maxima de pasajeros es ".$viaje1->get_cantMaximaPasajeros()."\n";
             
         break;
