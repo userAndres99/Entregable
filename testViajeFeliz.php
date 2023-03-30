@@ -49,7 +49,7 @@ $viaje1= new Viaje();
 
 $pasajerosDePrueba=cargarPasajerosDePrueba();
 
-$viaje1->set_todoPasajeros($pasajerosDePrueba);
+$viaje1->set_arrayPasajeros($pasajerosDePrueba);
 $viaje1->set_codigo(4);
 $viaje1->set_destino("Micasa");
 $viaje1->set_cantMaximaPasajeros(45);
@@ -147,7 +147,7 @@ do{
 
                         echo "Ingrese el Nuevo Nombre";
                         $nuevoNombre=trim(fgets(STDIN));
-                        $viaje1->set_arrayPasajeros($numPasajero,"nombre",$nuevoNombre);
+                        $viaje1->set_pasajero($numPasajero,"nombre",$nuevoNombre);
 
                         //$pasajerosDePrueba=$viaje1->get_arrayPasajeros();
                         //mostrarPasajeros($pasajerosDePrueba);
@@ -158,7 +158,7 @@ do{
 
                         echo "ingrese el nuevo apellido";
                         $nuevoApellido=trim(fgets(STDIN));
-                        $viaje1->set_arrayPasajeros($numPasajero,"apellido",$nuevoApellido);
+                        $viaje1->set_pasajero($numPasajero,"apellido",$nuevoApellido);
 
                     break;
 
@@ -166,7 +166,7 @@ do{
 
                         echo "ingrese el nuevo documento";
                         $nuevoDocumento=trim(fgets(STDIN));
-                        $viaje1->set_arrayPasajeros($numPasajero,"documento",$nuevoDocumento);
+                        $viaje1->set_pasajero($numPasajero,"documento",$nuevoDocumento);
 
                     break;
                 }

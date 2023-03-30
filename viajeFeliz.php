@@ -43,34 +43,25 @@ class Viaje{
     public function set_cantMaximaPasajeros($cantMaxPasajeros){
         $this->cantMaxPasajeros=$cantMaxPasajeros;
     }
-    public function set_todoPasajeros($arrayPasajeros){
+    public function set_arrayPasajeros($arrayPasajeros){
         $this->arrayPasajeros=$arrayPasajeros;
     }
-    public function set_arrayPasajeros($numeroPasajero,$datos,$datoModificado){ 
+    public function set_pasajero($numeroPasajero,$datos,$datoModificado){ 
         $this->arrayPasajeros[$numeroPasajero][$datos]=$datoModificado;
     }
 
     public function __toString(){
 
-
-
+        $cadena = "";
         for($i=0;$i < count($this->get_arrayPasajeros()); $i++){
-            $cadena=$cadena + $i."-NOMBRE:".$this->get_arrayPasajeros()[$i]["nombre"];
+            $cadena=$cadena. "[".$i."]"."-NOMBRE:".$this->get_arrayPasajeros()[$i]["nombre"]." APELLIDO:".$this->get_arrayPasajeros()[$i]["apellido"]." DNI:".$this->get_arrayPasajeros()[$i]["documento"]."\n";
             
-       }
+        }
 
-
-        return  $this->get_codigo()."\n".
-                $this->get_destino()."\n".
-                $this->get_cantMaximaPasajeros()."\n".
+        return  "El Codigo es: ".$this->get_codigo()."\n".
+                "El Destino es: ".$this->get_destino()."\n".
+                "La Cantidad Maxima de Pasajeros es: ".$this->get_cantMaximaPasajeros()."\n".
                 $cadena;
-                
-    
-
-        
-
-
-       
-                
+                          
     }
 }
