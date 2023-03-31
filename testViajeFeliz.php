@@ -80,21 +80,7 @@ function menuPasajeros(){
     return $opcionPasajero;
 
 }
-//--------------------------------------------------------------------------------
-/**
- * (un array de pasajeros de prueba)
- */
-/*function cargarPasajerosDePrueba(){
-    //array $losPasajerosV
-    $losPasajerosV=[];
-    $losPasajerosV[0]=["nombre"=>"juan" , "apellido" =>"menard" , "documento"=> 41327654];
-    $losPasajerosV[1]=["nombre"=>"lucas" , "apellido" =>"mendoza" , "documento"=> 42849651];
-    $losPasajerosV[2]=["nombre"=>"martin" , "apellido" =>"roca" , "documento"=> 35893621];
-    $losPasajerosV[3]=["nombre"=>"andres" , "apellido" =>"velozo" , "documento"=> 33009455];
-    $losPasajerosV[4]=["nombre"=>"marta" , "apellido" =>"rondozo" , "documento"=> 44047643];
 
-    return $losPasajerosV;
-}*/
 //--------------------------------------------------------------------------------
 
 //PROGRAMA PRINCIPAL viajeFeliz
@@ -124,14 +110,6 @@ $arrayPasajerosViaje = [];
 
 
 $viaje1= new Viaje();
-
-/**DATOS DE PRUEBAS 
- * pasajerosDePrueba=cargarPasajerosDePrueba();
- * $viaje1->set_arrayPasajeros($pasajerosDePrueba);
- * $viaje1->set_codigo(4);
- * $viaje1->set_destino("Micasa");
- * $viaje1->set_cantMaximaPasajeros(45);
-*/
 
 //PARA QUE EL USUARIO INGRESE LOS DATOS DEL VIAJE Y LOS PASAJEROS
 echo "\n----- BIENVENIDO A VIAJE FELIZ----- \n \n";
@@ -211,6 +189,9 @@ do{
                         $nuevoCodigo=trim(fgets(STDIN));
                         $viaje1=set_codigo($nuevoCodigo);
 
+                        //----- PARA VER SI SE CAMBIA EL CODIGO -----
+                        //echo $viaje1;
+
                     break;
 
                     case 2:
@@ -218,6 +199,9 @@ do{
                         echo "Ingrese el Nuevo Destino";
                         $nuevoDestino=trim(fgets(STDIN));
                         $viaje1=set_destino($nuevoDestino);
+
+                        //----- PARA VER SI SE CAMBIA EL DESTINO -----
+                        //echo $viaje1;
 
                     break;
 
@@ -253,7 +237,10 @@ do{
                             $arrayPasajerosViaje[count($arrayPasajerosViaje)]=["nombre"=>$nombrePasajero , "apellido" =>$apellidoPasajero , "documento"=> $documentoPasajero];
                         }
 
-                        $viaje1->set_arrayPasajeros($arrayPasajerosViaje);  
+                        $viaje1->set_arrayPasajeros($arrayPasajerosViaje);
+                        
+                        //----- PARA VER SI SE CAMBIA LA CANTIDAD MAXIMA Y SE AGREGAN LOS NUEVOS PASAJEROS -----
+                        //echo $viaje1;
                         
                     break;
                     
@@ -271,14 +258,14 @@ do{
             
 
 
-            //-----UN DO WHILE POR SI NO SE ENCUENTRA EL DOCUMENTO INGRESADO-----
+            //UN DO WHILE POR SI NO SE ENCUENTRA EL DOCUMENTO INGRESADO
             do{
 
             echo "Ingrese el Documento del Pasajero que Quiere Modificar";
             $documentoPasajero=trim(fgets(STDIN));
                 
             $i = 0;
-            //-----RECORRIDO PARCIAL PARA BUSCAR AL PASAJERO-----
+            //RECORRIDO PARCIAL PARA BUSCAR AL PASAJERO
             while (($i < count($arrayPasajerosViaje)) && !($documentoPasajero == $arrayPasajerosViaje[$i]["documento"])) {
                 $i = $i + 1;
             }
@@ -303,8 +290,7 @@ do{
                         $viaje1->set_pasajero($i,"nombre",$nuevoNombre);
 
                         //-----PARA VER SI SE GUARDO EL NOMBRE-----
-                       // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
-                       // mostrarPasajeros($pasajerosDePrueba);
+                       // echo viaje1;
 
                     break;
 
@@ -316,8 +302,7 @@ do{
                         $viaje1->set_pasajero($i,"apellido",$nuevoApellido);
 
                         //-----PARA VER SI SE GUARDO EL APELLIDO-----
-                        // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
-                        // mostrarPasajeros($pasajerosDePrueba);
+                        // echo viaje1;
 
                     break;
 
@@ -329,8 +314,7 @@ do{
                         $viaje1->set_pasajero($i,"documento",$nuevoDocumento);
 
                         //-----PARA VER SI SE GUARDO EL DOCUMENTO-----
-                        // $pasajerosDePrueba=$viaje1->get_arrayPasajeros();
-                        // mostrarPasajeros($pasajerosDePrueba);
+                        // echo viaje1;
 
                     break;
                 }
