@@ -153,11 +153,11 @@ $viaje1->set_arrayPasajeros($arrayPasajerosViaje);
 do{
 
     $opcion = menuPrincipal();
-
+    // SWITCH PARA EL MENU PRINCIPAL 
     switch($opcion){
 
         case 1:
-
+            //MUESTRA LOS DATOS DEL VIAJE
             echo "\n----- DATOS DEL VIAJE ----- \n \n";
 
             echo "el destino es ".$viaje1->get_destino()."\n";
@@ -166,7 +166,7 @@ do{
             
         break;
         case 2:
-
+            //MUESTRA LOS DATOS DE LOS PASAJEROS
             echo "\n----- DATOS DE LOS PASAJEROS ----- \n \n";
 
             $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
@@ -175,15 +175,17 @@ do{
         break;
         
         case 3:
-
+            //LAS OPCIONES DE MODIFICACION DEL VIAJE
             
             do{
 
                 $opcion = menuViaje();
-
+                //SWITCH PARA EL MENU DE MODIFICACION DE VIAJE
                 switch($opcion){
                     
                     case 1:
+                        //PARA MODIFICAR EL CODIGO
+
                         echo "--- El Codigo es ".$viaje1->get_codigo()." ---\n \n";
                         echo "Ingrese el Nuevo Codigo";
                         $nuevoCodigo=trim(fgets(STDIN));
@@ -195,6 +197,8 @@ do{
                     break;
 
                     case 2:
+                        //PARA MODIFICAR EL DESTINO
+
                         echo "--- El Destino es ".$viaje1->get_destino()." ---\n \n";
                         echo "Ingrese el Nuevo Destino";
                         $nuevoDestino=trim(fgets(STDIN));
@@ -206,6 +210,8 @@ do{
                     break;
 
                     case 3:
+                        //PARA MODIFICAR LA CANTIDAD MAXIMA DE PASAJEROS
+
                         echo "--- La Cantidad Maxima de Pasajeros es ".$viaje1->get_cantMaximaPasajeros()." ---\n \n";
 
                         $cantidadMaxPasajerosActual = $viaje1->get_cantMaximaPasajeros();
@@ -252,7 +258,7 @@ do{
         break;
 
         case 4:
-
+            //PARA MODIFICAR LOS DATOS DE LOS PASAJEROS
 
             $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
             
@@ -269,6 +275,7 @@ do{
             while (($i < count($arrayPasajerosViaje)) && !($documentoPasajero == $arrayPasajerosViaje[$i]["documento"])) {
                 $i = $i + 1;
             }
+            //UN IF PARA QUE LE AVISE AL USUARIO QUE EL DOCUMENTO NO FUE ENCONTRADO
             if( $i == count($arrayPasajerosViaje)){
                 echo "\n--- EL DOCUMENTO INGRESADO NO FUE ENCONTRADO EN LA LISTA DE PASAJEROS ---  \n \n ";
             }
@@ -279,10 +286,11 @@ do{
             do{
 
                 $opcion=menuPasajeros();
-                
+                //SWITCH PARA EL MENU DE MODIFICACION DE LOS PASAJEROS
                 switch ($opcion){
 
                     case 1:
+                        //PARA MODIFICAR EL NOMBRE
 
                         echo "--- (EL NOMBRE ES: ".$arrayPasajerosViaje[$i]["nombre"].") ---\n\n";
                         echo "Ingrese el Nuevo Nombre\n";
@@ -295,6 +303,7 @@ do{
                     break;
 
                     case 2:
+                        //PARA MODIFICAR EL APELLIDO
 
                         echo "--- (EL APELLIDO ES: ".$arrayPasajerosViaje[$i]["apellido"].") ---\n\n";
                         echo "Ingrese el Nuevo Apellido\n";
@@ -307,7 +316,8 @@ do{
                     break;
 
                     case 3:
-
+                        //PARA MODIFICAR EL DOCUMENTO
+                        
                         echo "--- (EL DOCUMENTO ES: ".$arrayPasajerosViaje[$i]["documento"].") ---\n\n";
                         echo "Ingrese el Nuevo Documento\n";
                         $nuevoDocumento=trim(fgets(STDIN));
