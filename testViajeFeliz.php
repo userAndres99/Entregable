@@ -99,7 +99,7 @@ function menuPasajeros(){
 
 //PROGRAMA PRINCIPAL viajeFeliz
 
-//int $codigoViaje,$cantidadMaxPasajeros,$i,$documentoPasajero,$opcion,$nuevoCodigo,$nuevaCantMaxPasajeros,$nuevoDocumento
+//int $codigoViaje,$cantidadMaxPasajeros,$i,$documentoPasajero,$opcion,$nuevoCodigo,$nuevaCantMaxPasajeros,$nuevoDocumento,$pasajerosNuevos,$cantidadMaxPasajerosActual
 //string $destinoViaje,$nombrePasajero,$apellidoPasajero,$nuevoDestino,$nuevoNombre,$nuevoApellido
 //array $arrayPasajerosViaje
 //objeto $viaje1
@@ -112,6 +112,8 @@ $opcion = 0;
 $nuevoCodigo = 0;
 $nuevaCantMaxPasajeros = 0;
 $nuevoDocumento = 0;
+$pasajerosNuevos = 0;
+$cantidadMaxPasajerosActual = 0;
 $destinoViaje = "";
 $nombrePasajero = "";
 $apellidoPasajero = "";
@@ -175,6 +177,7 @@ do{
     $opcion = menuPrincipal();
 
     switch($opcion){
+
         case 1:
 
             echo "\n----- DATOS DEL VIAJE ----- \n \n";
@@ -220,10 +223,38 @@ do{
 
                     case 3:
                         echo "--- La Cantidad Maxima de Pasajeros es ".$viaje1->get_cantMaximaPasajeros()." ---\n \n";
-                        echo "Ingrese la Nueva Cantidad Maxima de Pasajeros";
-                        $nuevaCantMaxPasajeros=trim(fgets(STDIN));
-                        $viaje1=set_cantMaximaPasajeros($nuevaCantMaxPasajeros);
 
+                        $cantidadMaxPasajerosActual = $viaje1->get_cantMaximaPasajeros();
+                        
+                        //UN DO WHILE POR SI EL USUARIO ELIGE UNA CANTIDAD MENOR A LA QUE YA ESTABA (NO SE COMO QUITAR PASAJEROS POR ESO)
+                        do{
+                            echo "Ingrese la Nueva Cantidad Maxima de Pasajeros Mayor a la Actual\n";
+                            $nuevaCantMaxPasajeros = trim(fgets(STDIN));
+                        
+                        }while ( $cantidadMaxPasajerosActual >= $nuevaCantMaxPasajeros );
+
+                        $viaje1->set_cantMaximaPasajeros($nuevaCantMaxPasajeros);
+                        $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
+                        $pasajerosNuevos = $nuevaCantMaxPasajeros - $cantidadMaxPasajerosActual;
+
+                        //PARA AGREGAR A LOS NUEVOS PASAJEROS
+                        for ($i = 1;$i <= $pasajerosNuevos; $i++){
+                            echo "--- Pasajero Nuevo ".$i." de ".$pasajerosNuevos."---\n \n";
+                            
+                            echo "Ingrese el Nombre: \n";
+                            $nombrePasajero=trim(fgets(STDIN));
+
+                            echo "Ingrese el Apellido: \n";
+                            $apellidoPasajero=trim(fgets(STDIN));
+
+                            echo "Ingrese el Documento: \n";
+                            $documentoPasajero=trim(fgets(STDIN));
+
+                            $arrayPasajerosViaje[count($arrayPasajerosViaje)]=["nombre"=>$nombrePasajero , "apellido" =>$apellidoPasajero , "documento"=> $documentoPasajero];
+                        }
+
+                        $viaje1->set_arrayPasajeros($arrayPasajerosViaje);  
+                        
                     break;
                     
                 }
@@ -261,12 +292,12 @@ do{
             do{
 
                 $opcion=menuPasajeros();
-
+                
                 switch ($opcion){
 
                     case 1:
 
-                        echo "--- (EL NOMBRE ES: ".$arrayPasajero[$i]["nombre"].") ---\n\n";
+                        echo "--- (EL NOMBRE ES: ".$arrayPasajerosViaje[$i]["nombre"].") ---\n\n";
                         echo "Ingrese el Nuevo Nombre\n";
                         $nuevoNombre=trim(fgets(STDIN));
                         $viaje1->set_pasajero($i,"nombre",$nuevoNombre);
@@ -279,7 +310,7 @@ do{
 
                     case 2:
 
-                        echo "--- (EL APELLIDO ES: ".$arrayPasajero[$i]["apellido"].") ---\n\n";
+                        echo "--- (EL APELLIDO ES: ".$arrayPasajerosViaje[$i]["apellido"].") ---\n\n";
                         echo "Ingrese el Nuevo Apellido\n";
                         $nuevoApellido=trim(fgets(STDIN));
                         $viaje1->set_pasajero($i,"apellido",$nuevoApellido);
@@ -292,7 +323,7 @@ do{
 
                     case 3:
 
-                        echo "--- (EL DOCUMENTO ES: ".$arrayPasajero[$i]["documento"].") ---\n\n";
+                        echo "--- (EL DOCUMENTO ES: ".$arrayPasajerosViaje[$i]["documento"].") ---\n\n";
                         echo "Ingrese el Nuevo Documento\n";
                         $nuevoDocumento=trim(fgets(STDIN));
                         $viaje1->set_pasajero($i,"documento",$nuevoDocumento);
