@@ -95,6 +95,31 @@ function menuPasajeros(){
 
     return $losPasajerosV;
 }*/
+//--------------------------------------------------------------------------------
+
+//PROGRAMA PRINCIPAL viajeFeliz
+
+//int $codigoViaje,$cantidadMaxPasajeros,$i,$documentoPasajero,$opcion,$nuevoCodigo,$nuevaCantMaxPasajeros,$nuevoDocumento
+//string $destinoViaje,$nombrePasajero,$apellidoPasajero,$nuevoDestino,$nuevoNombre,$nuevoApellido
+//array $arrayPasajerosViaje
+//objeto $viaje1
+
+$codigoViaje = 0;
+$cantidadMaxPasajeros = 0;
+$i = 0;
+$documentoPasajero = 0;
+$opcion = 0;
+$nuevoCodigo = 0;
+$nuevaCantMaxPasajeros = 0;
+$nuevoDocumento = 0;
+$destinoViaje = "";
+$nombrePasajero = "";
+$apellidoPasajero = "";
+$nuevoDestino = "";
+$nuevoNombre = "";
+$nuevoApellido = "";
+$arrayPasajerosViaje = [];
+
 
 $viaje1= new Viaje();
 
@@ -279,7 +304,7 @@ do{
                     break;
                 }
                 
-            }while($opcionPasajero=!3);
+            }while($opcion=!3);
 
         break;
       
