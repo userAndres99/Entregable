@@ -10,7 +10,7 @@ class Viaje{
     
 
     //CONSTRUCTOR
-    public function __contructor($codigoV,$destinoV,$cantMaxPasajeros,$arrayPasajeros){
+    public function __construct($codigoV,$destinoV,$cantMaxPasajeros,$arrayPasajeros){
 
         $this->codigoV=$codigoV;
         $this->destinoV=$destinoV;
